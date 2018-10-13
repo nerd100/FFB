@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public GameObject enemyContainer;
     public float spawnTimer = 2.5f;
-    public float enemySpeed = 2f;
+    public static float enemySpeed;
     private bool enemyContainerSpawned = false;
     private int speedMultiplicator = 0;
     private float speedBonus = 0.5f;
@@ -19,8 +19,8 @@ public class EnemySpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gm = GameObject.FindObjectOfType<GameManager>();
-
-	}
+        enemySpeed = 2.0f;
+}
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,6 +34,12 @@ public class EnemySpawner : MonoBehaviour {
         if (!changingSpeed) {
             changeSpeedOnScore();
         }
+
+        if (!GameManager.gameIsRunning)
+        {
+            enemySpeed = 0.0f;
+        }
+
     }
     IEnumerator SpawnEnemy()
     {
