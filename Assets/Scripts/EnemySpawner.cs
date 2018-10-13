@@ -28,7 +28,8 @@ public class EnemySpawner : MonoBehaviour {
     }
     IEnumerator SpawnEnemy()
     {
-        Instantiate(enemyContainer, this.transform.position, this.transform.rotation);
+        GameObject go = Instantiate(enemyContainer, this.transform.position, this.transform.rotation);
+        go.transform.parent = GameObject.FindGameObjectWithTag("HoldAllEnemies").transform;
         yield return new WaitForSeconds(spawnTimer);
         enemyContainerSpawned = false;
        
