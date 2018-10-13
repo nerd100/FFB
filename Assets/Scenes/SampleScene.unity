@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 936276513}
   m_Layer: 0
   m_Name: HoldAllEnemies
-  m_TagString: Untagged
+  m_TagString: HoldAllEnemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 1006380887}
   - component: {fileID: 1006380886}
   - component: {fileID: 1006380888}
+  - component: {fileID: 1006380889}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -538,6 +539,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Text: {fileID: 331358313}
+  PXHEIGHT: 0.64
+--- !u!61 &1006380889
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006380885}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 1.28}
+    newSize: {x: 0.32, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1.14}
+  m_EdgeRadius: 0
 --- !u!1 &1195036551
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +691,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1461315197}
+  - component: {fileID: 1461315198}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -678,9 +706,21 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1461315196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0.78, y: -0.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006380887}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461315198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1461315196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc769819d48d3b446ab6813384796705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1859235040014192, guid: f2cf3897ee83f8c4c9fbfe2a08e13b5b, type: 2}

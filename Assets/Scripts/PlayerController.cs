@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour {
     Vector2 endTouchPosition;
     Vector2 directionTouch;
 
+    Vector3 startPosition;
+
     public Text m_Text;
 
+    public float PXHEIGHT = 0.64f;
 
     void Start () {
-        gameObject.transform.position = new Vector3(-6.0f, -2.0f, 0.0f);
+        startPosition = transform.position;
         startTouchPosition = Vector2.zero;
         endTouchPosition = Vector2.zero;
         directionTouch = Vector2.zero;
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     {
 
 
-#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+#if !UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
 
         if (takeInput)
         {
@@ -100,6 +103,7 @@ public class PlayerController : MonoBehaviour {
             {
                 print("punch");
                 //TODO: punch
+                GetComponentInChildren<ShootProjectile>().Shoot();
                 StartCoroutine(TouchInputLag());
             }
             else if(directionTouch.x < -200)
@@ -112,13 +116,13 @@ public class PlayerController : MonoBehaviour {
                 directionTouch.y = 0;
                 isGrounded = false;
                 print("jump");
-                gameObject.transform.position = new Vector3(-6.0f, -1.2f, 0.0f);
+                gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT, 0.0f);
                 StartCoroutine(TouchInputLag());
             }
             else if(directionTouch.y < -200)
             {
                 print("slide");
-                gameObject.transform.position = new Vector3(-6.0f, -2.3f, 0.0f);
+                gameObject.transform.position = new Vector3(startPosition.x, startPosition.y- PXHEIGHT/2, 0.0f);
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
                 StartCoroutine(TouchInputLag());
             }
@@ -130,7 +134,7 @@ public class PlayerController : MonoBehaviour {
             {
                 isGrounded = true;
                 print("upup");
-                gameObject.transform.position = new Vector3(-6.0f, -0.2f, 0.0f);
+                gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT*2, 0.0f);
                 StartCoroutine(TouchInputLag());
             }
         }
@@ -155,15 +159,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void ResetCharacterPosition() {
-        gameObject.transform.position = new Vector3(-6.0f, -2.0f, 0.0f);
+        gameObject.transform.position = new Vector3(startPosition.x, startPosition.y , 0.0f);
         gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void ResetTouchInput()
     {
         directionTouch = Vector2.zero;
-        gameObject.transform.position = new Vector3(-6.0f, -2.0f, 0.0f);
+        gameObject.transform.position = new Vector3(startPosition.x, startPosition.y, 0.0f);
         gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Destroy(this.gameObject);
+    }
 }
