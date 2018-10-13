@@ -14,11 +14,15 @@ public class PlayerController : MonoBehaviour {
     Vector2 endTouchPosition;
     Vector2 directionTouch;
 
+    Vector3 startPosition;
+
     public Text m_Text;
 
+    private bool doubleJumpIsPossible = false;
+    public float PXHEIGHT = 0.64f;
 
     void Start () {
-        gameObject.transform.position = new Vector3(-6.0f, -2.0f, 0.0f);
+        startPosition = transform.position;
         startTouchPosition = Vector2.zero;
         endTouchPosition = Vector2.zero;
         directionTouch = Vector2.zero;
@@ -28,7 +32,7 @@ public class PlayerController : MonoBehaviour {
     {
 
 
-#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+#if !UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
 
         if (takeInput)
         {
@@ -73,7 +77,8 @@ public class PlayerController : MonoBehaviour {
         }
 #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE //mobile controller code
 
-        if (Input.touchCount > 0) { 
+        if (Input.touchCount > 0) {
+            print(Input.touchCount);
             Touch myTouch = Input.GetTouch(0);
             m_Text.text = "Touch Position : " + myTouch.position + "direction :" +directionTouch;
             switch (myTouch.phase) { 
@@ -89,55 +94,64 @@ public class PlayerController : MonoBehaviour {
           
                 case TouchPhase.Ended:
                     endTouchPosition = myTouch.position;
-                    //print(endTouchPosition);
+                    analyzeTouch(directionTouch);
                     break;            
             }
-        }
-        if ((Mathf.Abs(directionTouch.x) > 200 || Mathf.Abs(directionTouch.y) > 200) && checkTouchDirection)
-        {
-            checkTouchDirection = false;
-            if (directionTouch.x > 200)
-            {
-                print("punch");
-                //TODO: punch
-                StartCoroutine(TouchInputLag());
-            }
-            else if(directionTouch.x < -200)
-            {
-                print("doNothing");
-                StartCoroutine(TouchInputLag());
-            }
-            else if(directionTouch.y > 200)
-            {
-                directionTouch.y = 0;
-                isGrounded = false;
-                print("jump");
-                gameObject.transform.position = new Vector3(-6.0f, -1.2f, 0.0f);
-                StartCoroutine(TouchInputLag());
-            }
-            else if(directionTouch.y < -200)
-            {
-                print("slide");
-                gameObject.transform.position = new Vector3(-6.0f, -2.3f, 0.0f);
-                gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
-                StartCoroutine(TouchInputLag());
-            }
-        }
-
-        if (!isGrounded)
-        {
-            if (directionTouch.y > 300)  //TODO: change position and start animation
-            {
-                isGrounded = true;
-                print("upup");
-                gameObject.transform.position = new Vector3(-6.0f, -0.2f, 0.0f);
-                StartCoroutine(TouchInputLag());
-            }
-        }
-
-
+        }     
 
 #endif //End of mobile platform dependendent compilation section started above with #elif
+    }
+
+
+    public void analyzeTouch(Vector2 directionTouch)
+    {
+
+
+
+        if (!isGrounded && doubleJumpIsPossible)
+        {
+            if ((Mathf.Abs(directionTouch.x) < 200 && Mathf.Abs(directionTouch.y) < 200))  //TODO: change position and start animation
+            {
+                doubleJumpIsPossible = false;
+                print("upup");
+                gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT * 2, 0.0f);
+                StartCoroutine(TouchInputLag());
+            }
+        }
+        else
+        {
+
+
+            if ((Mathf.Abs(directionTouch.x) < 200 && Mathf.Abs(directionTouch.y) < 200) && checkTouchDirection && isGrounded)
+            {
+                doubleJumpIsPossible = true;
+                checkTouchDirection = false;
+                isGrounded = false;
+                print("jump");
+                gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT, 0.0f);
+                StartCoroutine(TouchInputLag());
+            }
+
+            else if ((Mathf.Abs(directionTouch.x) > 200 || Mathf.Abs(directionTouch.y) > 200) && checkTouchDirection && isGrounded)
+            {
+                checkTouchDirection = false;
+                if (directionTouch.x > 200)
+                {
+                    print("shoot");
+                    //TODO: punch
+                    GetComponentInChildren<ShootProjectile>().Shoot();
+                    StartCoroutine(TouchInputLag());
+                }
+                else if (directionTouch.y < -200)
+                {
+                    print("slide");
+                    gameObject.transform.position = new Vector3(startPosition.x, startPosition.y - PXHEIGHT / 2, 0.0f);
+                    gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                    StartCoroutine(TouchInputLag());
+                }
+            }
+        }
+
     }
 
     IEnumerator InputLag()
@@ -152,18 +166,23 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(1);
         ResetTouchInput();
         checkTouchDirection = true;
+        isGrounded = true;
     }
 
     public void ResetCharacterPosition() {
-        gameObject.transform.position = new Vector3(-6.0f, -2.0f, 0.0f);
+        gameObject.transform.position = new Vector3(startPosition.x, startPosition.y , 0.0f);
         gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void ResetTouchInput()
     {
         directionTouch = Vector2.zero;
-        gameObject.transform.position = new Vector3(-6.0f, -2.0f, 0.0f);
+        gameObject.transform.position = new Vector3(startPosition.x, startPosition.y, 0.0f);
         gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Destroy(this.gameObject);
+    }
 }
