@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212051856812966378}
   - component: {fileID: 50079911723258812}
   - component: {fileID: 61691587736058934}
+  - component: {fileID: 114168946298885912}
   m_Layer: 0
   m_Name: clown
   m_TagString: Untagged
@@ -87,6 +88,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 2.56}
   m_EdgeRadius: 0
+--- !u!114 &114168946298885912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287407750863730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f3312d6c4d16f408415394a0e6d0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212051856812966378
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -121,7 +133,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3af7df98eba1fb64f877e3406be3fadc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
