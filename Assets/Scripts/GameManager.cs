@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     private int basicAddScore = 1;
     public int globalScore;
 <<<<<<< HEAD
+<<<<<<< HEAD
     public GameObject panel;
     public TextMeshProUGUI score;
     public GameObject speechBubble;
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 =======
+=======
+>>>>>>> parent of 464643a... parallax, menu, statemachine
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +32,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
         if (speechBubbleActive) //activate SpeechBubble after a short delay
         {
             speechBubble.SetActive(true);
@@ -44,6 +48,11 @@ public class GameManager : MonoBehaviour {
 
         if (!runningPointsWait)
         {
+=======
+
+        if (!runningPointsWait)
+        {
+>>>>>>> parent of 464643a... parallax, menu, statemachine
             AddRunningPoints();
         }
 	}
@@ -61,6 +70,7 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(runningPointsCD);
         runningPointsWait = false;
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     public void nextScene()
@@ -87,6 +97,8 @@ public class GameManager : MonoBehaviour {
         speechBubbleActive = true;
     }
 
+=======
+>>>>>>> parent of 464643a... parallax, menu, statemachine
 =======
 >>>>>>> parent of 464643a... parallax, menu, statemachine
 }
