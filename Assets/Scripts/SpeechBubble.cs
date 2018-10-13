@@ -14,7 +14,7 @@ public class SpeechBubble : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        sentence = "Ich hasse Jahrmärkte \n !!!";
+        sentence = "I hate funfairs \n !!!";
         for(int i = 0; i < sentence.Length; i++)
         {
             charList.Add(sentence[i]);
