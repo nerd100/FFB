@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - HoldAllEnemies
+<<<<<<< HEAD
   - clown
+=======
+>>>>>>> fab4a5025fbf24c5d58b9bb98278fcd8f6f59372
   layers:
   - Default
   - TransparentFX
