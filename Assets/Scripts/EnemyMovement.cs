@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float newXPosition = this.transform.position.x - Time.deltaTime * EnemySpawner.enemySpeed;
+        float newXPosition = this.transform.position.x - Time.deltaTime * enemyManager.enemySpeed;
         this.transform.position = new Vector3(newXPosition, this.transform.position.y,0f);
 
         Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);

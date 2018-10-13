@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -12,6 +10,7 @@ public class GameManager : MonoBehaviour {
     private bool runningPointsWait;
     private int basicAddScore = 1;
     public int globalScore;
+<<<<<<< HEAD
     public GameObject panel;
     public TextMeshProUGUI score;
     public GameObject speechBubble;
@@ -20,11 +19,13 @@ public class GameManager : MonoBehaviour {
     private bool firstSpeech = true;
     // Use this for initialization
     void Start () {
-        globalScore = 0;
-        panel.SetActive(false);
-        gameIsRunning = true;
+=======
 
-    }
+	// Use this for initialization
+	void Start () {
+>>>>>>> parent of 464643a... parallax, menu, statemachine
+        globalScore = 0;
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,20 +42,9 @@ public class GameManager : MonoBehaviour {
         
 
 
-        if (checkIsPlayerAlive())
+        if (!runningPointsWait)
         {
-
-            if (!runningPointsWait)
-            {
-                AddRunningPoints();
-            }
-        }
-        else {
-            PlayerPrefs.SetInt("roundScore", globalScore);
-            panel.SetActive(true);
-            score.text = "Score: " + globalScore;
-            gameIsRunning = false;
-            print("GAMEOVER");
+            AddRunningPoints();
         }
 	}
 
@@ -66,23 +56,12 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(AddRunningPointsCo());
     }
 
-    public bool checkIsPlayerAlive()
-    {
-        if (GameObject.FindGameObjectWithTag("player")) {
-            return true;
-        }
-        else
-        {
-            return false; ;
-        }
-        
-    }
-
     IEnumerator AddRunningPointsCo()
     {
         yield return new WaitForSeconds(runningPointsCD);
         runningPointsWait = false;
     }
+<<<<<<< HEAD
 
     public void nextScene()
     {
@@ -108,4 +87,6 @@ public class GameManager : MonoBehaviour {
         speechBubbleActive = true;
     }
 
+=======
+>>>>>>> parent of 464643a... parallax, menu, statemachine
 }
