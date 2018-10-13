@@ -106,8 +106,6 @@ public class PlayerController : MonoBehaviour {
     public void analyzeTouch(Vector2 directionTouch)
     {
 
-
-
         if (!isGrounded && doubleJumpIsPossible)
         {
             if ((Mathf.Abs(directionTouch.x) < 200 && Mathf.Abs(directionTouch.y) < 200))  //TODO: change position and start animation
@@ -120,8 +118,6 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-
-
             if ((Mathf.Abs(directionTouch.x) < 200 && Mathf.Abs(directionTouch.y) < 200) && checkTouchDirection && isGrounded)
             {
                 doubleJumpIsPossible = true;
@@ -138,7 +134,6 @@ public class PlayerController : MonoBehaviour {
                 if (directionTouch.x > 200)
                 {
                     print("shoot");
-                    //TODO: punch
                     GetComponentInChildren<ShootProjectile>().Shoot();
                     StartCoroutine(TouchInputLag());
                 }
