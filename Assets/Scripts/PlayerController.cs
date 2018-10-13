@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
     {
 
 
-#if !UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
 
         if (takeInput)
         {
