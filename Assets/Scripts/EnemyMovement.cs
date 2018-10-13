@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour {
 
     private Camera mainCamera;
-    public float enemySpeed = 2f;
+    private EnemySpawner enemyManager;
 
     void Awake()
     {
@@ -14,12 +14,12 @@ public class EnemyMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        enemyManager = GameObject.FindObjectOfType<EnemySpawner>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float newXPosition = this.transform.position.x - Time.deltaTime * enemySpeed;
+        float newXPosition = this.transform.position.x - Time.deltaTime * enemyManager.enemySpeed;
         this.transform.position = new Vector3(newXPosition, this.transform.position.y,0f);
 
         Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
