@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviour {
     public int globalScore;
     public GameObject panel;
     public TextMeshProUGUI score;
-
+    public GameObject speechBubble;
     public static bool gameIsRunning;
-
-	// Use this for initialization
-	void Start () {
+    private bool speechBubbleActive = false;
+    private bool firstSpeech = true;
+    // Use this for initialization
+    void Start () {
         globalScore = 0;
         panel.SetActive(false);
         gameIsRunning = true;
@@ -27,6 +28,18 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (speechBubbleActive) //activate SpeechBubble after a short delay
+        {
+            speechBubble.SetActive(true);
+            speechBubbleActive = false;
+            firstSpeech = false;
+        }
+        else if(firstSpeech){
+            StartCoroutine(waitForTheSpeechBubble());
+        }
+            
+        
+
 
         if (checkIsPlayerAlive())
         {
@@ -87,6 +100,12 @@ public class GameManager : MonoBehaviour {
         EnemySpawner.enemySpeed = 2.0f;
         GameManager.gameIsRunning = true;
 
+    }
+
+    IEnumerator waitForTheSpeechBubble()
+    {
+        yield return new WaitForSeconds(1f);
+        speechBubbleActive = true;
     }
 
 }

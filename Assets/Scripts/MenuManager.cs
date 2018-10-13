@@ -13,7 +13,6 @@ public class MenuManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         highscore = PlayerPrefs.GetInt("highscore", 0);
-        print(highscore);
         if (PlayerPrefs.GetInt("roundScore", 0) > highscore)
         {
             highscore = PlayerPrefs.GetInt("roundScore");

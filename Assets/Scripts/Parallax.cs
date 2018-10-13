@@ -25,7 +25,6 @@ public class Parallax : MonoBehaviour {
 	void Update () {
         if (GameManager.gameIsRunning)
         {
-            print(Time.deltaTime);
             layer1.transform.position = new Vector3(layer1.transform.position.x - layer1Speed * Time.deltaTime, layer1.transform.position.y, layer1.transform.position.z);
             layer2.transform.position = new Vector3(layer2.transform.position.x - layer2Speed * Time.deltaTime, layer2.transform.position.y, layer2.transform.position.z);
             layer3.transform.position = new Vector3(layer3.transform.position.x - layer3Speed * Time.deltaTime, layer3.transform.position.y, layer3.transform.position.z);
