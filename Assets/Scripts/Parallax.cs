@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour {
@@ -13,21 +14,39 @@ public class Parallax : MonoBehaviour {
     private float layer2Speed;
     private float layer3Speed;
 
+    public GameObject forgroundBude;
+    public GameObject middlegroundBude;
 
+    List<Sprite> budenSprites = new List<Sprite>();
+    private Object[] budenImages;
     // Use this for initialization
+
     void Start () {
         layer1Speed = 1.0f;
         layer2Speed = 0.3f;
         layer3Speed = 0.1f;
+
+
+        budenImages = Resources.LoadAll("Buden", typeof(Sprite));
+
+        foreach (var t in budenImages)
+        {
+            budenSprites.Add((Sprite)t);
+        }
+
+        print(budenSprites.Count);
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if (GameManager.gameIsRunning)
         {
             layer1.transform.position = new Vector3(layer1.transform.position.x - layer1Speed * Time.deltaTime, layer1.transform.position.y, layer1.transform.position.z);
             layer2.transform.position = new Vector3(layer2.transform.position.x - layer2Speed * Time.deltaTime, layer2.transform.position.y, layer2.transform.position.z);
             layer3.transform.position = new Vector3(layer3.transform.position.x - layer3Speed * Time.deltaTime, layer3.transform.position.y, layer3.transform.position.z);
+
+
         }
     }
 }
