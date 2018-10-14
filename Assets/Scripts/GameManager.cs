@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour {
 
@@ -18,11 +19,27 @@ public class GameManager : MonoBehaviour {
     public static bool gameIsRunning;
     private bool speechBubbleActive = false;
     private bool firstSpeech = true;
+
+    //Music
+    public AudioClip musicFile;
+    public GameObject audioPrefab;
+    public static bool playSong = false;
+    public AudioMixer audioMixer;
+
     // Use this for initialization
     void Start () {
         globalScore = 0;
         panel.SetActive(false);
         gameIsRunning = true;
+
+        if (playSong == false)
+        { //falls der Song nicht gespielt wird, dann starte ihn
+            audioMixer.SetFloat("volume", PlayerPrefs.GetFloat("volume", 0.0f));
+            GameObject audioGameObject = Instantiate(audioPrefab, Vector3.zero, Quaternion.identity);
+            audioGameObject.GetComponentInChildren<AudioSource>().clip = musicFile;
+            audioGameObject.GetComponentInChildren<AudioSource>().Play();
+            playSong = true;
+        }
 
     }
 	
@@ -99,7 +116,7 @@ public class GameManager : MonoBehaviour {
     {
         EnemySpawner.enemySpeed = 2.0f;
         GameManager.gameIsRunning = true;
-
+        playSong = false;
     }
 
     IEnumerator waitForTheSpeechBubble()
@@ -107,5 +124,7 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         speechBubbleActive = true;
     }
+
+    
 
 }
