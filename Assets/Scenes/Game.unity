@@ -6559,6 +6559,10 @@ MonoBehaviour:
   panel: {fileID: 656553874}
   score: {fileID: 257044960}
   speechBubble: {fileID: 926939827}
+  musicFile: {fileID: 8300000, guid: 73cf75fdf647bcf44bac5ad1f8563a0a, type: 3}
+  audioPrefab: {fileID: 1536130102955336, guid: e27bbcdb90ad00f4b86d2e21ea5f7aee,
+    type: 2}
+  audioMixer: {fileID: 24100000, guid: 0f2fdd6fe6b58a044a6c7b66572242b5, type: 2}
 --- !u!4 &772804935
 Transform:
   m_ObjectHideFlags: 0
@@ -6990,7 +6994,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1006380885}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
