@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     Vector2 directionTouch;
 
     Vector3 startPosition;
+    Animator anim;
 
     public Text m_Text;
 
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour {
     private float volHighRange = 1.0f;
 
     void Start () {
+        anim = GetComponent<Animator>();
         startPosition = transform.position;
         startTouchPosition = Vector2.zero;
         endTouchPosition = Vector2.zero;
@@ -65,7 +67,9 @@ public class PlayerController : MonoBehaviour {
                 gameObject.transform.position = new Vector3(-6.0f, -1.2f, 0.0f);
                 takeInput = false;
                 isGrounded = false;
+                anim.SetBool("jump1",true);
                 StartCoroutine(InputLag());
+                
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
@@ -73,7 +77,11 @@ public class PlayerController : MonoBehaviour {
                 gameObject.transform.position = new Vector3(-6.0f, -2.3f, 0.0f);
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
                 takeInput = false;
+                anim.SetBool("slide", true);
+                
                 StartCoroutine(InputLag());
+               
+
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
@@ -95,6 +103,8 @@ public class PlayerController : MonoBehaviour {
                 print("upup");
                 gameObject.transform.position = new Vector3(-6.0f, -0.2f, 0.0f);
                 takeInput = false;
+                anim.SetBool("jump2", true);
+                
                 StartCoroutine(InputLag());
             }
         }
@@ -123,6 +133,9 @@ public class PlayerController : MonoBehaviour {
         }     
 
 #endif //End of mobile platform dependendent compilation section started above with #elif
+        anim.SetBool("jump1", false);
+        anim.SetBool("jump2", false);
+        anim.SetBool("slide", false);
     }
 
 
@@ -137,6 +150,7 @@ public class PlayerController : MonoBehaviour {
                 doubleJumpIsPossible = false;
                 print("upup");
                 gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT * 2, 0.0f);
+                anim.SetBool("jump2", true);
                 StartCoroutine(TouchInputLag());
             }
         }
@@ -152,6 +166,7 @@ public class PlayerController : MonoBehaviour {
                 source.PlayOneShot(jump1Sound);
                 print("jump");
                 gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT, 0.0f);
+                anim.SetBool("jump1", false);
                 StartCoroutine(TouchInputLag());
             }
 
@@ -179,6 +194,7 @@ public class PlayerController : MonoBehaviour {
                     print("slide");
                     gameObject.transform.position = new Vector3(startPosition.x, startPosition.y - PXHEIGHT / 2, 0.0f);
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                    anim.SetBool("slide", true);
                     StartCoroutine(TouchInputLag());
                 }
             }
@@ -188,9 +204,13 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator InputLag()
     {
+        
         yield return new WaitForSeconds(1);
         ResetCharacterPosition();
         takeInput = true;
+        anim.SetBool("jump2", false);
+        anim.SetBool("jump1", false);
+        anim.SetBool("slide", false);
     }
 
     IEnumerator TouchInputLag()

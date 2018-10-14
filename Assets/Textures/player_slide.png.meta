@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: d59c30e0843b4af4180b9de3565355fb
+guid: c1c774e794404ce49b6b8bce2585f24c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: player_doublejump_0
-    21300002: player_doublejump_1
-    21300004: player_doublejump_2
-    21300006: player_doublejump_3
+    21300000: player_slide_0
+    21300002: player_slide_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -49,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 35
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_doublejump_0
+      name: player_slide_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 64
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -113,39 +111,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cbe9c03b447472469e31a6afe70e4dc
+      spriteID: 2509319f34fc8504d9e20f9f22a29b99
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_doublejump_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab066abe1b4677a4595f1eb974090242
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_doublejump_2
+      name: player_slide_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 64
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,27 +131,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae73dcb7ef737064d8f631a24aa14aef
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_doublejump_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 449fa318968e6204991753357f9b8940
+      spriteID: d6a38b6f73e117a4aae36a3c43ee640e
       vertices: []
       indices: 
       edges: []
@@ -181,7 +139,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e591c97d44283284f9f1de02158c1e03
+    spriteID: 9c577ba6e9713c04ebdd7d54195c2ae0
     vertices: []
     indices: 
     edges: []

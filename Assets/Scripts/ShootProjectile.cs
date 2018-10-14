@@ -6,7 +6,7 @@ public class ShootProjectile : MonoBehaviour {
 
 
     Vector2 spawnPosition;
-    public GameObject projectile;
+    public GameObject[] projectiles;
 
     // Use this for initialization
     void Start () {
@@ -16,7 +16,8 @@ public class ShootProjectile : MonoBehaviour {
 
     public void Shoot()
     {
-        GameObject clone = Instantiate(projectile, transform.position, transform.rotation);
+        int randomPrefab = Random.Range(0, 2);
+        GameObject clone = Instantiate(projectiles[randomPrefab], transform.position, transform.rotation);
         clone.transform.position = spawnPosition;
     }
 
