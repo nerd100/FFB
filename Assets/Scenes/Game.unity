@@ -6646,7 +6646,8 @@ MonoBehaviour:
   layer3: {fileID: 120865594}
   forgroundBude: {fileID: 1315888865028248, guid: 525ae7eb084ecb042b9c5d01220a2e4c,
     type: 2}
-  middlegroundBude: {fileID: 0}
+  middlegroundBude: {fileID: 1572601924582698, guid: 499b21ca1d740b4479a3076fe1509acc,
+    type: 2}
 --- !u!4 &939745100
 Transform:
   m_ObjectHideFlags: 0
@@ -6761,7 +6762,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1006380885}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
