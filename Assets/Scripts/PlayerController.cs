@@ -22,24 +22,47 @@ public class PlayerController : MonoBehaviour {
     private bool doubleJumpIsPossible = false;
     public float PXHEIGHT = 0.64f;
 
+
+    //Sounds
+
+    public AudioClip shootSound1;
+    public AudioClip shootSound2;
+    public AudioClip jump1Sound;
+    public AudioClip jump2Sound;
+    public AudioClip slideSound;
+
+    private AudioSource source;
+    private float volLowRange = .5f;
+    private float volHighRange = 1.0f;
+
     void Start () {
         anim = GetComponent<Animator>();
         startPosition = transform.position;
         startTouchPosition = Vector2.zero;
         endTouchPosition = Vector2.zero;
         directionTouch = Vector2.zero;
+
+        source = GetComponent<AudioSource>();
     }
 
     void Update()
     {
 
 
-#if !UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
 
         if (takeInput)
         {
             if (Input.GetKeyUp(KeyCode.UpArrow))  //TODO: change position and start animation
             {
+                if (Random.Range(0, 2) == 0)
+                {
+                    source.PlayOneShot(shootSound1);
+                }
+                else
+                {
+                    source.PlayOneShot(shootSound2);
+                }
                 print("up");
                 gameObject.transform.position = new Vector3(-6.0f, -1.2f, 0.0f);
                 takeInput = false;
@@ -123,6 +146,7 @@ public class PlayerController : MonoBehaviour {
         {
             if ((Mathf.Abs(directionTouch.x) < 200 && Mathf.Abs(directionTouch.y) < 200))  //TODO: change position and start animation
             {
+                source.PlayOneShot(jump2Sound);
                 doubleJumpIsPossible = false;
                 print("upup");
                 gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT * 2, 0.0f);
@@ -134,9 +158,12 @@ public class PlayerController : MonoBehaviour {
         {
             if ((Mathf.Abs(directionTouch.x) < 200 && Mathf.Abs(directionTouch.y) < 200) && checkTouchDirection && isGrounded)
             {
+                
+                
                 doubleJumpIsPossible = true;
                 checkTouchDirection = false;
                 isGrounded = false;
+                source.PlayOneShot(jump1Sound);
                 print("jump");
                 gameObject.transform.position = new Vector3(startPosition.x, startPosition.y + PXHEIGHT, 0.0f);
                 anim.SetBool("jump1", false);
@@ -148,12 +175,22 @@ public class PlayerController : MonoBehaviour {
                 checkTouchDirection = false;
                 if (directionTouch.x > 200)
                 {
+                    if(Random.Range(0 ,2) == 0)
+                    {
+                        source.PlayOneShot(shootSound1);
+                    }
+                    else
+                    {
+                        source.PlayOneShot(shootSound2);
+                    }
+                    
                     print("shoot");
                     GetComponentInChildren<ShootProjectile>().Shoot();
                     StartCoroutine(TouchInputLag());
                 }
                 else if (directionTouch.y < -200)
                 {
+                    source.PlayOneShot(slideSound);
                     print("slide");
                     gameObject.transform.position = new Vector3(startPosition.x, startPosition.y - PXHEIGHT / 2, 0.0f);
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);

@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
             panel.SetActive(true);
             score.text = "Score: " + globalScore;
             gameIsRunning = false;
-            print("GAMEOVER");
+
         }
 	}
 
