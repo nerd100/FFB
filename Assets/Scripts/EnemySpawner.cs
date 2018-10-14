@@ -64,7 +64,7 @@ public class EnemySpawner : MonoBehaviour {
     {
         speedMultiplicator += 1;
         enemySpeed += speedMultiplicator * speedBonus;
-        Debug.Log(speedMultiplicator);
+       // Debug.Log(speedMultiplicator);
         yield return new WaitForSeconds(changeSpeedCD);
         changingSpeed = false;
     }
