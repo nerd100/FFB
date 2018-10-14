@@ -10,9 +10,9 @@ public class Parallax : MonoBehaviour {
     public GameObject layer2;
     public GameObject layer3;
 
-    private float layer1Speed;
-    private float layer2Speed;
-    private float layer3Speed;
+    public float layer1Speed;
+    public float layer2Speed;
+    public float layer3Speed;
 
     public GameObject forgroundBude;
     public GameObject middlegroundBude;
